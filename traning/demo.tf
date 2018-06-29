@@ -2,9 +2,6 @@ resource "rancher_environment" "dentsu" {
     name = "Dentsu"
     description = "Local enviroment dentsu"
     orchestration =  "kubernetes"
-    provisioner "local-exec" {
-      command = "echo $(ip a | grep ens | grep inet | awk '{print $2}' | awk -F '/' '{print $1}') ${var.hostname} >> /etc/hosts"
-    }
 }
 resource "rancher_registration_token" "dentsu-token" {
   environment_id = "${rancher_environment.dentsu.id}"
